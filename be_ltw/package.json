@@ -10,6 +10,7 @@
     "build": "\"nest build app\" \"nest build queries\" \"nest build share\"",
     "format": "prettier --write \"apps/**/*.ts\" \"libs/**/*.ts\"",
     "start": "nest start",
+    "format:lint-staged": "lint-staged",
     "start:dev": "nest start --watch",
     "seed": "ts-node -r tsconfig-paths/register libs/queries/src/seeds/main.ts",
     "start:debug": "nest start --debug --watch",
