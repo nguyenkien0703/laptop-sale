@@ -6,6 +6,7 @@ import userDetailReducer from '@/stores/user/detailSlice'
 import commentLaptopReducer from '@/stores/comment/listSlice'
 import signUpReducer from '@/stores/auth/registerSlice'
 import createCommentReducer from '@/stores/comment/createSlice'
+import forgotPasswordReducer from '@/stores/forgot-password/slice'
 const rootReducer = combineReducers({
     auth: authReducer,
     laptopList: laptopListReducer,
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
     userDetail: userDetailReducer,
     signUp: signUpReducer,
     createComment: createCommentReducer,
+    forgotPassword: forgotPasswordReducer,
 })
 
 export default rootReducer

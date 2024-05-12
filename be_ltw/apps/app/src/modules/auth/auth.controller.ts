@@ -1,11 +1,25 @@
-import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common'
-import { ApiTags } from '@nestjs/swagger'
+import {
+    Body,
+    Controller,
+    HttpCode,
+    HttpStatus,
+    Param,
+    Post,
+    UseGuards,
+} from '@nestjs/common'
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger'
 import { AuthService } from './auth.service'
 import {
+    ChangePasswordDto,
+    ForgotPasswordDto,
     LoginUserByPassword,
     RefreshTokenDto,
+    ResetPasswordDto,
     SignUpUserDto,
 } from '@app/queries/dtos'
+import { JwtAuthGuard } from '@app/shares/guards/jwt-auth.guard'
+import { UserScope } from '@app/shares/decorators/user.decorator'
+import { User } from '@app/queries'
 
 @Controller('auths')
 @ApiTags('auths')
@@ -35,5 +49,45 @@ export class AuthController {
         const newAccessToken =
             await this.authService.generateNewAccessJWT(refreshTokenDto)
         return newAccessToken
+    }
+    @Post('/forgot-password')
+    @HttpCode(HttpStatus.OK)
+    @ApiBearerAuth()
+    async sendEmailForgotPassword(
+        @Body() forgotPasswordDto: ForgotPasswordDto,
+    ) {
+        await this.authService.sendEmailForgotPassword(forgotPasswordDto)
+        return 'Send reset password token to your email successfully!!!'
+    }
+
+    @Post('/email/verify/:token')
+    @HttpCode(HttpStatus.OK)
+    @ApiBearerAuth()
+    async verifyEmailAndResetPassword(
+        @Param('token') linkToken: string,
+        @Body() resetPasswordDto: ResetPasswordDto,
+    ) {
+        const isEmailVerify =
+            await this.authService.verifyEmailAndResetPassword(
+                linkToken,
+                resetPasswordDto,
+            )
+        return isEmailVerify
+    }
+
+    @Post('/reset-password')
+    @UseGuards(JwtAuthGuard)
+    @ApiBearerAuth()
+    @HttpCode(HttpStatus.OK)
+    async changePassword(
+        @Body() changePasswordDto: ChangePasswordDto,
+        @UserScope() user: User,
+    ) {
+        const userId = user?.id
+        const changePassword = await this.authService.changePassword(
+            userId,
+            changePasswordDto,
+        )
+        return changePassword
     }
 }

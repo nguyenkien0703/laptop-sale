@@ -33,6 +33,10 @@ interface Configuration {
         }
         cc_emails: Array<string>
     }
+    fe: {
+        port: number
+        ipAddress: string
+    }
 }
 export default (): Configuration => ({
     database: {
@@ -69,5 +73,9 @@ export default (): Configuration => ({
             password: process.env.EMAIL_PASSWORD,
         },
         cc_emails: (process.env.CC_EMAILS || '').split(','),
+    },
+    fe: {
+        port: parseInt(process.env.FE_PORT, 10) || 3001,
+        ipAddress: process.env.IP_ADDRESS,
     },
 })

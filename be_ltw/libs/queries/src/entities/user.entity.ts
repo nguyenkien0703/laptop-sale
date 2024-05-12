@@ -48,6 +48,20 @@ export class User extends BaseEntity {
     })
     phone: string
 
+    @Column({
+        name: 'reset_password_token',
+        type: 'varchar',
+        length: 255,
+        nullable: true,
+    })
+    resetPasswordToken: string
+
+    @Column({
+        nullable: true,
+        name: 'reset_password_expire_time',
+    })
+    resetPasswordExpireTime: Date
+
     @Column({ nullable: false, name: 'role_id', type: 'integer', width: 11 })
     roleId: number
 

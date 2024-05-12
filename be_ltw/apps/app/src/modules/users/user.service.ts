@@ -55,4 +55,22 @@ export class UserService {
         })
         return user
     }
+
+    async getUserByEmail(email: string): Promise<User> {
+        const user = await this.userRepository.findOne({
+            where: {
+                email: email,
+            },
+        })
+        return user
+    }
+
+    async getUserByResetPasswordToken(token: string): Promise<User> {
+        const user = await this.userRepository.findOne({
+            where: {
+                resetPasswordToken: token,
+            },
+        })
+        return user
+    }
 }

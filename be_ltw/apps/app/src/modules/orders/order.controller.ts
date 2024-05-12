@@ -4,9 +4,10 @@ import {
     Get,
     HttpCode,
     HttpStatus,
-    Post, Query,
-    UseGuards
-} from "@nestjs/common";
+    Post,
+    Query,
+    UseGuards,
+} from '@nestjs/common'
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger'
 import { OrderService } from './order.service'
 import { JwtAuthGuard } from '@app/shares/guards/jwt-auth.guard'

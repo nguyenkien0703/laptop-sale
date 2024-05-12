@@ -66,3 +66,12 @@ export class SignUpUserDto {
     })
     phone: string
 }
+
+export class ForgotPasswordDto {
+    @IsEmail()
+    @IsNotEmpty()
+    @ApiProperty({
+        example: 'nguyenkien123ns@gmail.com',
+    })
+    email: string
+}
