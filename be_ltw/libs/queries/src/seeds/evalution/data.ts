@@ -11,7 +11,7 @@ export const evalutionData: InsertEvalutionDto[] = [
     },
     {
         rate: 4,
-        userId: 2,
+        userId: 1,
         laptopId: 1,
     },
     {

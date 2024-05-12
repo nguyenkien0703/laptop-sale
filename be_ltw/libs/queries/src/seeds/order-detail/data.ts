@@ -26,12 +26,12 @@ export const orderDetailData: InsertOrderDetailDto[] = [
         orderId: 3,
         laptopId: 10,
         quantity: 1,
-        userId: 2,
+        userId: 1,
     },
     {
         orderId: 4,
         laptopId: 11,
         quantity: 1,
-        userId: 2,
+        userId: 1,
     },
 ]
