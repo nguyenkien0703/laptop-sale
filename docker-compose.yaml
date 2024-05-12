@@ -1,0 +1,42 @@
+version: "3"
+services:
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 19091978chinh
+      MYSQL_DATABASE: laptop
+    ports:
+      - "3306:3306"
+    # volumes:
+    #   - ./db:/var/lib/mysql
+    networks:
+      - mynetwork
+  server: 
+    build:
+      context: ./be_ltw
+      dockerfile: Dockerfile
+    environment:
+      DB_HOST: db
+      DB_SYNC: true
+      DB_USERNAME: root
+      DB_PASSWORD: 19091978chinh
+      DB_DATABASE: laptop
+    ports:
+      - "4000:4000"
+    networks:
+      - mynetwork
+  fe: 
+    build:
+      context: ./fe-ttcs
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001"
+    networks:
+      - mynetwork
+volumes:
+  db:
+    driver: local
+networks:
+  mynetwork:
+    driver: bridge
