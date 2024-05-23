@@ -7,6 +7,6 @@ COPY yarn.lock package.json ./
 RUN yarn install --frozen-lockfile
 
 COPY . .
-EXPOSE 4000
+EXPOSE 5000
 
 CMD ["yarn", "start"]
